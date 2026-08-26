@@ -180,7 +180,6 @@ html[dir="rtl"] .section-head{text-align:right;}
   display:flex; align-items:center; justify-content:center;
   margin:-4px -4px 2px;
 }
-.item-media .media-emoji{font-size:2.6rem; filter:drop-shadow(0 2px 5px rgba(42,24,15,.25));}
 .item-name{font-family:'Cairo',sans-serif; font-weight:800; font-size:1.02rem; color:var(--ink);}
 .item-desc{font-size:.84rem; color:var(--ink-soft); flex-grow:1; min-height:2.4em;}
 .item-bottom{display:flex; align-items:center; justify-content:space-between; gap:10px; margin-top:auto;}
@@ -240,6 +239,7 @@ html[dir="rtl"] .footer-brand span{font-family:var(--font-display-rtl);}
 }
 html[dir="rtl"] .drawer{transform:translateX(-100%);}
 .drawer.open{transform:translateX(0);}
+html[dir="rtl"] .drawer.open{transform:translateX(0);}
 .drawer-head{
   display:flex; align-items:center; justify-content:space-between;
   padding:18px 20px; border-bottom:1px solid var(--line); background:var(--white);
@@ -303,7 +303,7 @@ html[dir="rtl"] .back-link svg{transform:scaleX(-1);}
 
 @media (max-width: 720px){
   .brand-name{font-size:.92rem;}
-  .header-actions .cart-btn span{display:none;}
+  .header-actions .cart-btn .cart-label{display:none;}
   .cart-btn{padding:10px 12px;}
   .cat-nav-wrap{top:62px;}
   .floating-bar{display:none;}
@@ -332,7 +332,7 @@ html[dir="rtl"] .back-link svg{transform:scaleX(-1);}
       </div>
       <button type="button" class="cart-btn" id="open-cart-btn">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
-        <span data-i18n="cart">Cart</span>
+        <span class="cart-label" data-i18n="cart">Cart</span>
         <span class="cart-count" id="cart-count" data-empty="true">0</span>
       </button>
     </div>
@@ -426,7 +426,7 @@ const I18N = {
   en: {
     tagline_small: "Fried Chicken & Burgers",
     cart: "Cart",
-    hero_sub: "Browse the full menu, build your order, and enjoy your meal — all from this page.",
+    hero_sub: "Browse the full menu, build your order, and send it straight to us on WhatsApp — all from this page.",
     hero_cta_menu: "View menu",
     footer_order: "01033446755",
     footer_address: "Street 27, El Nozha 2, Cairo, Egypt, 4641112",
@@ -471,7 +471,7 @@ const I18N = {
   ar: {
     tagline_small: "فراخ مقرمشة و برجر",
     cart: "السلة",
-    hero_sub: "تصفح المنيو كامل، اختار طلبك، واستمتع بوجبتك — كله من الصفحة دي.",
+    hero_sub: "تصفح المنيو كامل، اختار طلبك، وابعته لنا على واتساب — كله من الصفحة دي.",
     hero_cta_menu: "شوف المنيو",
     footer_order: "01033446755",
     footer_address: "شارع ٢٧، النزهة ٢، القاهرة، مصر، 4641112",
@@ -678,9 +678,7 @@ function itemCardHTML(item){
 
   return `
     <div class="item-card" data-item-card="${item.id}">
-      <div class="item-media" style="background-image:url('assets/menu/${item.id}.jpg'), linear-gradient(135deg,var(--cream-2),var(--orange-2))">
-        <span class="media-emoji">${item.emoji}</span>
-      </div>
+      <div class="item-media" style="background-image:url('assets/menu/${item.id}.jpg'), linear-gradient(135deg,var(--cream-2),var(--orange-2))"></div>
       <div class="item-name">${item[lang].n}</div>
       <div class="item-desc">${item[lang].d}</div>
       ${variantsHTML}
