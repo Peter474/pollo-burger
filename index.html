@@ -426,7 +426,7 @@ const I18N = {
   en: {
     tagline_small: "Fried Chicken & Burgers",
     cart: "Cart",
-    hero_sub: "Browse the full menu, build your order, and send it straight to us on WhatsApp — all from this page.",
+    hero_sub: "Browse the full menu, build your order, and get it delivered fast — all from this page.",
     hero_cta_menu: "View menu",
     footer_order: "01033446755",
     footer_address: "Street 27, El Nozha 2, Cairo, Egypt, 4641112",
@@ -471,7 +471,7 @@ const I18N = {
   ar: {
     tagline_small: "فراخ مقرمشة و برجر",
     cart: "السلة",
-    hero_sub: "تصفح المنيو كامل، اختار طلبك، وابعته لنا على واتساب — كله من الصفحة دي.",
+    hero_sub: "تصفح المنيو كامل، اختار طلبك، ووصله لحد باب البيت — كله من الصفحة دي.",
     hero_cta_menu: "شوف المنيو",
     footer_order: "01033446755",
     footer_address: "شارع ٢٧، النزهة ٢، القاهرة، مصر، 4641112",
@@ -660,6 +660,18 @@ function renderCatNav(){
 }
 
 /* ---------- Render: menu ---------- */
+const PLACEHOLDER_PALETTE = [
+  ['#FFE8CC','#F5A123'], ['#FFD9C2','#E8703A'], ['#FFEFD8','#D98324'],
+  ['#F6E3C5','#B96A2C'], ['#FFE0B8','#F08A3C'], ['#FCD9A8','#C4622A'],
+  ['#FFEAD1','#E4933B'], ['#F3DCC0','#A85A28'], ['#FFDFBF','#EA7E33'],
+  ['#F8E1BE','#CE7A2E'], ['#FFE4CF','#DB6A2C'], ['#F5DEC8','#BE6E31']
+];
+function placeholderGradient(id){
+  let hash = 0;
+  for(let i=0;i<id.length;i++){ hash = (hash*31 + id.charCodeAt(i)) >>> 0; }
+  const [c1,c2] = PLACEHOLDER_PALETTE[hash % PLACEHOLDER_PALETTE.length];
+  return `linear-gradient(135deg,${c1},${c2})`;
+}
 function itemCardHTML(item){
   const isVariant = !!item.variants;
   const chosen = pendingVariantChoice[item.id] || (isVariant ? item.variants[0].k : null);
@@ -678,7 +690,7 @@ function itemCardHTML(item){
 
   return `
     <div class="item-card" data-item-card="${item.id}">
-      <div class="item-media" style="background-image:url('assets/menu/${item.id}.jpg'), linear-gradient(135deg,var(--cream-2),var(--orange-2))"></div>
+      <div class="item-media" style="background-image:url('assets/menu/${item.id}.jpg'), ${placeholderGradient(item.id)}"></div>
       <div class="item-name">${item[lang].n}</div>
       <div class="item-desc">${item[lang].d}</div>
       ${variantsHTML}
